@@ -38,11 +38,11 @@ const ImgContainer = ({alt, src}) => {
                             <h5>{h5}</h5>
                             <p>{p}</p>
                             <Link to="/signup">
-                                <Button intent='primary'>Signup</Button>
+                                <Button large intent='primary'>Signup</Button>
                             </Link>
                             <span style={{padding: '5px'}} />
                             <Link to="/login">
-                                <Button intent='success'>Login</Button>
+                                <Button large intent='success'>Login</Button>
                             </Link>
                         </div>
                     </div>

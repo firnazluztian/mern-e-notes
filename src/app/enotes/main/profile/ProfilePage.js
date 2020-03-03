@@ -14,6 +14,7 @@ const ProfilePage = () => {
 
         <div className='container'>
             <h1>Notes</h1>
+            WIP notes db
         </div>
 
     </Fragment>
