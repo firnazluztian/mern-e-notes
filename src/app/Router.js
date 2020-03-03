@@ -11,7 +11,7 @@ const Router = () => {
     return <ReachRouter>
         <Redirect to='/home' from='/' noThrow />
 
-        <HomePage path='home' />
+        <HomePage path='/home'  />
 
         <LoginPage path='/login'/>
         <SignupPage path='/signup'/>
@@ -19,7 +19,7 @@ const Router = () => {
         <ProfilePage path='/profile'/>
         <AdminPage path='/admin' />
 
-        <NotFound404Page path='/404' />
+        <NotFound404Page path='*' />
     </ReachRouter>
 }
 

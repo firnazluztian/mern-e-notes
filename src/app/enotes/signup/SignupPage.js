@@ -72,6 +72,7 @@ const SignupPage = () => {
                         type='password' 
                         placeholder='confirm password' 
                         className='form-control' 
+                        onKeyPress={e => ((e.charCode === 13) ? handleSubmit() : console.log())}
                     />
                 </div>
                 <div className="d-flex justify-content-center">
