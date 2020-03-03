@@ -1,5 +1,14 @@
 import React from 'react'
-
+/**
+ *
+ * accept props: 
+ * 
+ * margin, marginTop, marginBottom, marginLeft, marginRight
+ * 
+ * padding, paddingTop, paddingBottom, paddingLeft, paddingRight
+ * @param {*} props
+ * @returns void
+ */
 const Space = (props) => {
     const style = {
         margin: props.margin,

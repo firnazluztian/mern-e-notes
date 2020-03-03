@@ -2,40 +2,40 @@ import React from 'react'
 import faker from 'faker';
 import { Link } from '@reach/router'
 
-const ImgContainer = props => {
+const ImgContainer = ({alt, src}) => {
     return (
       <div>
-        <img alt={props.alt} src={props.src} />
+        <img alt={alt} src={src} />
       </div>
     );
   };
   
-  const TextContainer = props => {
+  const TextContainer = ({h1, h5, p}) => {
     return (
       <div className="container-fluid box" id="parent" style={{textAlign: 'center'}}>
         <div className="container box" id="child">
-          <h1>{props.h1}</h1>
-          <h5>{props.h5}</h5>
-          <p>{props.p}</p>
+          <h1>{h1}</h1>
+          <h5>{h5}</h5>
+          <p>{p}</p>
         </div>
       </div>
     );
   };
 
-  const Container = props => {
+  const Container = ({bgcolor, isRight, isLeft, isMain, isMid, src, alt, h1, h5, p, btnName}) => {
   return (
-    <div className="container-fluid" id="parent" style={{backgroundColor: props.bgcolor}}>
-        {props.isMain && <div className="container section" id="child">
+    <div className="container-fluid" id="parent" style={{backgroundColor: bgcolor}}>
+        {isMain && <div className="container section" id="child">
             <div class="row">
                 <div class="col-sm">
-                    <ImgContainer src={props.src} alt={props.alt} />
+                    <ImgContainer src={src} alt={alt} />
                 </div>
                 <div class="col-sm">
                     <div className="container-fluid box" id="parent" style={{textAlign: 'center'}}>
                         <div className="container box" id="child">
-                            <h1>{props.h1}</h1>
-                            <h5>{props.h5}</h5>
-                            <p>{props.p}</p>
+                            <h1>{h1}</h1>
+                            <h5>{h5}</h5>
+                            <p>{p}</p>
                             <Link to="/signup">
                                 <button className="btn btn-primary">Signup</button>
                             </Link>
@@ -49,38 +49,38 @@ const ImgContainer = props => {
             </div>
         </div>}
 
-        {props.isMid &&
+        {isMid &&
         <div
             className="container"
             style={{paddingTop: 2 + 'em', paddingBottom: 2 + 'em'}}
         >
-            <TextContainer h1={props.h1} h5={props.h5} p={props.p} />
+            <TextContainer h1={h1} h5={h5} p={p} />
             <Link to="/signup">
-            <button className="btn btn-primary">{props.btnName}</button>
+            <button className="btn btn-primary">{btnName}</button>
             </Link>
 
         </div>}
 
-        {props.isRight &&
+        {isRight &&
         <div className="container section" id="child">
             <div class="row">
             <div class="col-sm">
-                <ImgContainer src={props.src} alt={props.alt} />
+                <ImgContainer src={src} alt={alt} />
             </div>
             <div class="col-sm">
-                <TextContainer h1={props.h1} h5={props.h5} p={props.p} />
+                <TextContainer h1={h1} h5={h5} p={p} />
             </div>
             </div>
         </div>}
 
-        {props.isLeft &&
+        {isLeft &&
         <div className="container section" id="child">
             <div class="row">
             <div class="col-sm">
-                <TextContainer h1={props.h1} h5={props.h5} p={props.p} />
+                <TextContainer h1={h1} h5={h5} p={p} />
             </div>
             <div class="col-sm">
-                <ImgContainer src={props.src} alt={props.alt} />
+                <ImgContainer src={src} alt={alt} />
             </div>
             </div>
         </div>}

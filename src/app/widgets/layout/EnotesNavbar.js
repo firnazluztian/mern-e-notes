@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from '@reach/router'
+import Space from './Space';
 
 const NavList = props => {
     return (
@@ -13,15 +14,10 @@ const NavList = props => {
 
 const EnotesNavbar = () => {
     return <nav class="navbar navbar-expand-lg navbar-light">
-        <img
-          src="https://static.thenounproject.com/png/105260-200.png"
-          width="30"
-          height="30"
-          class="d-inline-block align-top"
-          alt=""
-          style={{marginRight: 10 + 'px'}}
-        />
         E-NOTES
+
+        <Space marginRight="10px" />
+  
         <button
           class="navbar-toggler"
           type="button"
@@ -37,7 +33,6 @@ const EnotesNavbar = () => {
         <div class="collapse navbar-collapse dropdown-list" id="navbarNav">
           <ul class="navbar-nav mr-auto">
               <NavList name="Profile" isActive="active" link="/profile"/>
-              <NavList name="Setting" isActive="active" link="/"/>
           </ul>
 
           <div className="login-container">
