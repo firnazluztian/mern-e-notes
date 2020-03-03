@@ -1,40 +1,82 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { navigate, Link } from '@reach/router'
 import { Button } from '@blueprintjs/core'
+import { toastSuccess, toastWarning } from '../../widgets/layout/toaster'
+import axios from 'axios'
 
 const SignupPage = () => {
-    const handleSubmit = () => navigate('/profile')
+    const [state, setState] = useState([{
+        username: '',
+        email: '',
+        password: ''
+    }])
 
-    const signupFormStyle = {
-        width: '400px',
-        backgroundColor: '#FAFAFA',
-        padding: '1em',
-        margin: '1em',
-        borderRadius: '5px'
+    const postUser = async () => {
+        await axios
+        .post('http://localhost:5000/users/add', {
+            username: state.username,
+            email: state.email,
+            password: state.password
+        })
+        .then(res => {
+            console.log('@state', state)
+            toastSuccess('You have succesfully been registered! please login to proceed')
+            navigate('/login')
+        })
+        .catch(err => {
+            console.log(err)
+            toastWarning('Something went wrong, please try again or contact developer if issue persisted')
+        })
     }
+
+    const handleChange = (e) => setState ({...state, [e.target.name]: e.target.value})
+    const handleSubmit = () => postUser()
+    
     return <div className='row' style={{height:'100vh'}}>
         <div className='col-sm-12 my-auto'>
-            <div className='card mx-auto' style={signupFormStyle}>
-                <form onSubmit={handleSubmit}>
-                    <p><strong>Sign up or </strong><Link to='/login'>sign in</Link></p>
-                    
-                    <div className='form-group'>
-                        <input type='email' placeholder='email' className='form-control' id='exampleInputEmail1' aria-describedby='emailHelp' />
-                    </div>
-                    <div className='form-group'>
-                        <input type='username' placeholder='username' className='form-control' />
-                    </div>
-                    <div className='form-group'>
-                        <input type='password' placeholder='password' className='form-control' id='exampleInputPassword1' />
-                    </div>
-                    <div className='form-group'>
-                        <input type='password' placeholder='confirm password' className='form-control' id='exampleInputPassword1' />
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <Button type='submit' intent='primary'>Submit</Button>
-                    </div>
-                    
-                </form>
+            <div className='card mx-auto forms'>
+                <p><strong>Sign up or </strong><Link to='/login'>sign in</Link></p>
+                
+                <div className='form-group'>
+                    <input 
+                        type='email' 
+                        placeholder='email' 
+                        className='form-control' 
+                        name='email'
+                        value={state.email}
+                        onChange={handleChange} 
+                    />
+                </div>
+                <div className='form-group'>
+                    <input 
+                        type='text' 
+                        placeholder='username' 
+                        className='form-control' 
+                        name='username'
+                        value={state.username}
+                        onChange={handleChange} 
+                    />
+                </div>
+                <div className='form-group'>
+                    <input 
+                        type='password' 
+                        placeholder='password' 
+                        className='form-control' 
+                        name='password'
+                        value={state.password}
+                        onChange={handleChange} 
+                    />
+                </div>
+                <div className='form-group'>
+                    <input 
+                        type='password' 
+                        placeholder='confirm password' 
+                        className='form-control' 
+                    />
+                </div>
+                <div className="d-flex justify-content-center">
+                    <Button type='submit' intent='primary' onClick={handleSubmit}>Submit</Button>
+                </div>
             </div>
         </div>
     </div>

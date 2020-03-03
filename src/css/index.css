@@ -176,6 +176,15 @@ code {
 
 }
 
+/* sign up and login form */
+.forms {
+  width: 400px;
+  background-color: #FAFAFA;
+  padding: 1em;
+  margin: 1em;
+  border-radius: 5px;
+}
+
 /* // Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) { 
   #dropdown-list {
