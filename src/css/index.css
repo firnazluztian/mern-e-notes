@@ -12,6 +12,12 @@ code {
     monospace;
 }
 
+/* HOMEPAGE/component */
+.container-full-width {
+  height: 100vm;
+  padding: 5em;
+}
+
 .navbar {
   background-color: none;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -34,7 +40,7 @@ code {
 
 .section {
   padding: 20px;
-  height: 45em;
+  overflow: auto;
   text-align: center;
 }
 
