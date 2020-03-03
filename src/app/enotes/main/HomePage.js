@@ -1,6 +1,7 @@
 import React from 'react'
 import faker from 'faker';
 import { Link } from '@reach/router'
+import { Button } from '@blueprintjs/core'
 
 const ImgContainer = ({alt, src}) => {
     return (
@@ -37,11 +38,11 @@ const ImgContainer = ({alt, src}) => {
                             <h5>{h5}</h5>
                             <p>{p}</p>
                             <Link to="/signup">
-                                <button className="btn btn-primary">Signup</button>
+                                <Button intent='primary'>Signup</Button>
                             </Link>
                             <span style={{padding: '5px'}} />
                             <Link to="/login">
-                                <button className="btn btn-success">Login</button>
+                                <Button intent='success'>Login</Button>
                             </Link>
                         </div>
                     </div>
@@ -56,7 +57,7 @@ const ImgContainer = ({alt, src}) => {
         >
             <TextContainer h1={h1} h5={h5} p={p} />
             <Link to="/signup">
-            <button className="btn btn-primary">{btnName}</button>
+              <Button intent="primary" large>{btnName}</Button>
             </Link>
 
         </div>}

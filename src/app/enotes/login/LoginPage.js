@@ -1,5 +1,6 @@
 import React from 'react'
 import { navigate, Link } from '@reach/router'
+import { Button } from '@blueprintjs/core'
 
 const LoginPage = () => {
     const handleSubmit = () => navigate('/profile')
@@ -18,13 +19,13 @@ const LoginPage = () => {
                     <p><strong>Sign in or </strong><Link to='/signup'>or create an account</Link></p>
                     
                     <div className='form-group'>
-                        <input type='email' placeholder='email' className='form-control' id='exampleInputEmail1' aria-describedby='emailHelp' />
+                        <input type='username' placeholder='username' className='form-control' />
                     </div>
                     <div className='form-group'>
                         <input type='password' placeholder='password' className='form-control' id='exampleInputPassword1' />
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type='submit' className='btn btn-primary'>Login</button>
+                        <Button type='submit' intent='primary'>Login</Button>
                     </div>
                     
                 </form>

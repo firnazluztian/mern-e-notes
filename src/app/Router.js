@@ -5,6 +5,7 @@ import LoginPage from './enotes/login/LoginPage'
 import ProfilePage from './enotes/main/profile/ProfilePage'
 import SignupPage from './enotes/signup/SignupPage'
 import NotFound404Page from '../app/enotes/404'
+import AdminPage from './enotes/main/AdminPage'
 
 const Router = () => {
     return <ReachRouter>
@@ -16,6 +17,7 @@ const Router = () => {
         <SignupPage path='/signup'/>
 
         <ProfilePage path='/profile'/>
+        <AdminPage path='/admin' />
 
         <NotFound404Page path='/404' />
     </ReachRouter>

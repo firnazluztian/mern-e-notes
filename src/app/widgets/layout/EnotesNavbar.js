@@ -1,6 +1,7 @@
 import React from 'react'
-import { Link } from '@reach/router'
+import { Link, navigate } from '@reach/router'
 import Space from './Space';
+import { Button } from '@blueprintjs/core'
 
 const NavList = props => {
     return (
@@ -32,18 +33,18 @@ const EnotesNavbar = () => {
 
         <div class="collapse navbar-collapse dropdown-list" id="navbarNav">
           <ul class="navbar-nav mr-auto">
-              <NavList name="Profile" isActive="active" link="/profile"/>
+              <NavList name="Profile" link="/profile"/>
           </ul>
 
           <div className="login-container">
-              <Link to='/home'>
-              <button
-                  className='btn my-2 my-sm-0 is btn-danger'
+              
+              <Button
+                  intent='danger'
                   type="submit"
+                  onClick={() => navigate('/home')}
               >
-                  LOGOUT
-              </button>
-              </Link>
+                LOGOUT
+              </Button>
           </div>
         </div>
     </nav>
