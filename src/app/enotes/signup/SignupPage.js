@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { navigate, Link } from '@reach/router'
-import { Button } from '@blueprintjs/core'
 import { toastSuccess, toastWarning } from '../../widgets/layout/toaster'
 import axios from 'axios'
 
@@ -76,7 +75,7 @@ const SignupPage = () => {
                     />
                 </div>
                 <div className="d-flex justify-content-center">
-                    <Button type='submit' intent='primary' onClick={handleSubmit}>Submit</Button>
+                    <button type='submit' className='button is-info' onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
         </div>

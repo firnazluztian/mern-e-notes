@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect, Router as ReachRouter } from '@reach/router'
-import HomePage from './enotes/main/HomePage'
+import HomePage from './enotes/main/home/HomePage'
 import LoginPage from './enotes/login/LoginPage'
 import ProfilePage from './enotes/main/profile/ProfilePage'
 import SignupPage from './enotes/signup/SignupPage'

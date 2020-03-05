@@ -1,18 +1,18 @@
 import React from 'react'
-import { Link, navigate } from '@reach/router'
+import { navigate } from '@reach/router'
 import Space from './Space';
 import { Button } from '@blueprintjs/core'
 import { toastSuccess } from './toaster';
 
-const NavList = props => {
-    return (
-      <div>
-        <li class={'nav-item ' + props.isActive}>
-          <Link className="nav-link" to={props.link}>{props.name} <span class="sr-only">(current)</span></Link>
-        </li>
-      </div>
-    );
-  };
+// const NavList = props => {
+//     return (
+//       <div>
+//         <li class={'nav-item ' + props.isActive}>
+//           <Link className="nav-link" to={props.link}>{props.name} <span class="sr-only">(current)</span></Link>
+//         </li>
+//       </div>
+//     );
+// }
 
 const EnotesNavbar = () => {
     return <nav class="navbar navbar-expand-lg navbar-light">
@@ -39,16 +39,16 @@ const EnotesNavbar = () => {
 
           <div className="login-container">
               
-              <Button
-                  intent='danger'
-                  type="submit"
+              <button
+                  className='button is-danger'
+                  type='submit'
                   onClick={() => {
                     toastSuccess('Successfully logged out')
                     navigate('/home')}
                   }
               >
                 LOGOUT
-              </Button>
+              </button>
           </div>
         </div>
     </nav>

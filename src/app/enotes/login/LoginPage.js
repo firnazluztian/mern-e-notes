@@ -1,4 +1,3 @@
-import { Button } from '@blueprintjs/core'
 import { Link, navigate } from '@reach/router'
 import React from 'react'
 
@@ -26,7 +25,7 @@ const LoginPage = () => {
                     />
                 </div>
                 <div class="d-flex justify-content-center">
-                    <Button type='submit' intent='primary' onClick={handleSubmit}>Login</Button>
+                    <button type='submit' className='button is-info' onClick={handleSubmit}>Login</button>
                 </div>
             </div>
         </div>

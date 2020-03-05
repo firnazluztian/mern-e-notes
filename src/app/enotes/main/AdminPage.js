@@ -1,10 +1,46 @@
 // for debugging purposes
-import { Button, Dialog } from '@blueprintjs/core'
 import axios from 'axios'
 import React, { useEffect, useState, Fragment } from 'react'
 import Space from '../../widgets/layout/Space'
 import { toastSuccess, toastWarning } from '../../widgets/layout/toaster'
 import { Flex } from '../../widgets/layout/Allignment'
+
+const AdminLogin = ({state, handleChange, handleSubmit}) => {
+    // const [loginState, useLoginState] = useEffect(state)
+    return <Fragment>
+    <div className='row' style={{height:'100vh'}}>
+        <div className='col-sm-12 my-auto'>
+            <div className='card mx-auto forms'>
+                <p>Administrator</p>
+                <div className='form-group'>
+                    <input 
+                        type='username' 
+                        placeholder='username' 
+                        className='form-control' 
+                        name='username'
+                        value={state.username}
+                        onChange={handleChange} 
+                    />
+                </div>
+                <div className='form-group'>
+                    <input 
+                        type='password' 
+                        placeholder='password' 
+                        className='form-control' 
+                        name='password'
+                        value={state.password}
+                        onChange={handleChange} 
+                        onKeyPress={e => ((e.charCode === 13) ? handleSubmit : console.log())}
+                    />
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type='submit' className='button is-primary' onClick={handleSubmit}>Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</Fragment>
+}
 
 const initialState = [{ id: '', username: '', email: '', password: '' }]
 const AdminPage = () => {
@@ -60,41 +96,9 @@ const AdminPage = () => {
 
     return (
         <Fragment>
-            {!isAdmin &&
-                <Fragment>
-                    <div className='row' style={{height:'100vh'}}>
-                        <div className='col-sm-12 my-auto'>
-                            <div className='card mx-auto forms'>
-                                <p>Administrator</p>
-                                <div className='form-group'>
-                                    <input 
-                                        type='username' 
-                                        placeholder='username' 
-                                        className='form-control' 
-                                        name='username'
-                                        value={state.username}
-                                        onChange={handleChange} 
-                                    />
-                                </div>
-                                <div className='form-group'>
-                                    <input 
-                                        type='password' 
-                                        placeholder='password' 
-                                        className='form-control' 
-                                        name='password'
-                                        value={state.password}
-                                        onChange={handleChange} 
-                                        onKeyPress={e => ((e.charCode === 13) ? handleSubmit() : console.log())}
-                                    />
-                                </div>
-                                <div class="d-flex justify-content-center">
-                                    <Button type='submit' intent='primary' onClick={handleSubmit}>Login</Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Fragment>
-            }
+
+            {/* LOGIN AS ADMIN */}
+            {!isAdmin && <AdminLogin state={state} handleChange={handleChange} handleSubmit={handleSubmit} />}
 
             {/* DISPLAY IF ADMIN */}
             {isAdmin &&
@@ -120,23 +124,25 @@ const AdminPage = () => {
                                 <td>{item.email}</td>
                                 <td>
                                     <Flex>
-                                    <Button 
-                                        intent='primary' 
-                                        onClick={() => { 
-                                            setEdit(true)
-                                            setState({
-                                                id: item._id,
-                                                username: item.username,
-                                                email: item.email,
-                                                password: item.password
-                                            })
-                                        }
-                                    }>Edit</Button>
-                                    <Space marginRight='1em' />
-                                    <Button 
-                                        intent='danger' 
-                                        onClick={() => deleteUser(item._id)
-                                    }>Delete</Button>
+                                        <button 
+                                            className='button is-primary' 
+                                            onClick={() => { 
+                                                setEdit(true)
+                                                setState({
+                                                    id: item._id,
+                                                    username: item.username,
+                                                    email: item.email,
+                                                    password: item.password
+                                                })
+                                            }}>Edit
+                                        </button>
+
+                                        <Space marginRight='1em' />
+                                        
+                                        <button 
+                                            className='button is-danger' 
+                                            onClick={() => deleteUser(item._id)}>Delete
+                                        </button>
                                     </Flex>
                                 </td>
                             </tr>
@@ -180,12 +186,13 @@ const AdminPage = () => {
                         />
                     </div>
                     <div className="d-flex justify-content-center">
-                        <Button type='submit' intent='primary' onClick={handleSubmit}>Submit</Button>
+                        <button type='submit' className='button is-primary' onClick={handleSubmit}>Submit</button>
                     </div>
                 </Fragment>
                 }
             </div>
             }
+
         </Fragment>
     )
 }
