@@ -2,11 +2,11 @@ import React, { Fragment, useEffect } from 'react'
 import EnotesNavbar from '../../../widgets/layout/EnotesNavbar'
 import Space from '../../../widgets/layout/Space'
 import { toastPrimary } from '../../../widgets/layout/toaster'
+import NoteCreator from './NoteCreator'
+import NoteList from './NoteList'
 
 const ProfilePage = () => {
-    useEffect(() => {
-        toastPrimary('logged in')
-    })
+    useEffect(() => toastPrimary('logged in'))
     return <Fragment>
         <EnotesNavbar />
 
@@ -14,7 +14,10 @@ const ProfilePage = () => {
 
         <div className='container'>
             <h1>Notes</h1>
-            WIP notes db
+            <div className='columns'>
+                <div className='column'><NoteCreator /></div>
+                <div className='column'><NoteList /></div>
+            </div>
         </div>
 
     </Fragment>
