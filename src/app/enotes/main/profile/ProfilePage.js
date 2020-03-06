@@ -3,7 +3,7 @@ import EnotesNavbar from '../../../widgets/layout/EnotesNavbar'
 import Space from '../../../widgets/layout/Space'
 import NoteCreator from './NoteCreator'
 import NoteList from './NoteList'
-import { AppContext } from '../../../App'
+import { AppContext } from '../../../data/globalState'
 
 const ProfilePage = () => {
     const { state } = useContext(AppContext)

@@ -1,8 +1,8 @@
-import React, { Fragment, useContext, useState, useEffect } from 'react'
+import React, { Fragment, useContext } from 'react'
 import Space from '../../../widgets/layout/Space'
 import { toastSuccess } from '../../../widgets/layout/toaster'
 import faker from 'faker';
-import { AppContext } from '../../../App'
+import { AppContext } from '../../../data/globalState'
 
 const dummAPI = [
     { id: 0, title: 'Biology class', content: faker.lorem.paragraph()},
@@ -11,7 +11,7 @@ const dummAPI = [
     { id: 3, title: 'English class', content: faker.lorem.paragraph()}
 ]
 
-const NotesCard = ({id, header, content, dateCreated}) => {
+const NotesCard = ({header, content, dateCreated}) => {
     const {state, dispatch} = useContext(AppContext)    
 
     const handleEdit = () => toastSuccess(`"${header}" is succesfully edited`)
