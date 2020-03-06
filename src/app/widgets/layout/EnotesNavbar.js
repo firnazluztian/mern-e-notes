@@ -1,8 +1,7 @@
 import React from 'react'
 import { navigate } from '@reach/router'
-import Space from './Space';
-import { Button } from '@blueprintjs/core'
-import { toastSuccess } from './toaster';
+import Space from './Space'
+import { toastSuccess } from './toaster'
 
 // const NavList = props => {
 //     return (

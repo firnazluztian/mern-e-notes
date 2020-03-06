@@ -30,7 +30,7 @@ const AdminLogin = ({state, handleChange, handleSubmit}) => {
                         name='password'
                         value={state.password}
                         onChange={handleChange} 
-                        onKeyPress={e => ((e.charCode === 13) ? handleSubmit : console.log())}
+                        onKeyPress={e => ((e.charCode === 13) ? handleSubmit() : console.log())}
                     />
                 </div>
                 <div class="d-flex justify-content-center">

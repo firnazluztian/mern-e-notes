@@ -4,6 +4,7 @@ import Container from './Container'
 
 const HomePage = () => {
     return <div>
+
     <Container
       isMain={true}
       bgcolor="white"
@@ -12,6 +13,7 @@ const HomePage = () => {
       h1="E-Student Notes"
       h5="The only app that you will ever need for your notes taking"
     />
+
     <Container
       isLeft={true}
       bgcolor="lightgrey"
@@ -21,6 +23,7 @@ const HomePage = () => {
       h5={faker.lorem.sentence ()}
       p={faker.lorem.paragraph ()}
     />
+
     <Container
       isRight={true}
       bgcolor=""
@@ -30,6 +33,7 @@ const HomePage = () => {
       h5={faker.lorem.sentence ()}
       p={faker.lorem.paragraph ()}
     />
+
     <Container
       isMid={true}
       bgcolor="lightgrey"
@@ -38,6 +42,9 @@ const HomePage = () => {
       p={faker.lorem.paragraph ()}
       btnName="Sign me up now"
     />
+
+    <Container isFooter={true} bgcolor='' />
+
   </div>
 }
 
