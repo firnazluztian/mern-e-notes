@@ -6,21 +6,21 @@ import { toastSuccess } from './toaster'
 // const NavList = props => {
 //     return (
 //       <div>
-//         <li class={'nav-item ' + props.isActive}>
-//           <Link className="nav-link" to={props.link}>{props.name} <span class="sr-only">(current)</span></Link>
+//         <li className={'nav-item ' + props.isActive}>
+//           <Link classNameName="nav-link" to={props.link}>{props.name} <span className="sr-only">(current)</span></Link>
 //         </li>
 //       </div>
 //     );
 // }
 
 const EnotesNavbar = () => {
-    return <nav class="navbar navbar-expand-lg navbar-light">
+    return <nav className="navbar navbar-expand-lg navbar-light">
         E-NOTES
 
         <Space marginRight="10px" />
   
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-toggle="collapse"
           data-target="#navbarNav"
@@ -28,11 +28,11 @@ const EnotesNavbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-        <span class="navbar-toggler-icon" />
+        <span className="navbar-toggler-icon" />
         </button>
 
-        <div class="collapse navbar-collapse dropdown-list" id="navbarNav">
-          <ul class="navbar-nav mr-auto">
+        <div className="collapse navbar-collapse dropdown-list" id="navbarNav">
+          <ul className="navbar-nav mr-auto">
               {/* <NavList name="Profile" link="/profile"/> */}
           </ul>
 

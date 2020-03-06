@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react'
+import { toastSuccess } from '../../../widgets/layout/toaster'
 
 const NoteCreator = () => {
+    const handleSubmit = () => toastSuccess('Succesfully saved')
     return <Fragment>
         <div className='form-group'>
             <input 
@@ -16,7 +18,7 @@ const NoteCreator = () => {
                 className='textarea form-control' 
             />
         </div>
-        <button className='button is-success'>Save</button>
+        <button onClick={handleSubmit} className='button is-success'>Save</button>
     </Fragment>
 }
 

@@ -1,8 +1,12 @@
 import { Link, navigate } from '@reach/router'
 import React from 'react'
+import { toastSuccess } from '../../widgets/layout/toaster'
 
 const LoginPage = () => {
-    const handleSubmit = () => navigate('/profile')
+    const handleSubmit = () => {
+        navigate('/profile')
+        toastSuccess('You are logged in')
+    }
 
     return <div className='row' style={{height:'100vh'}}>
         <div className='col-sm-12 my-auto'>
