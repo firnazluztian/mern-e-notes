@@ -13,7 +13,7 @@ export const toaster = Toaster.create({
 //    timeout: durationInMilliseconds
 // })
 
-const duration = 1000
+const duration = 2000
 
 export const toastSuccess = (msg, durationInMilliseconds) => toaster.show({
    message: msg,

@@ -4,11 +4,7 @@ import { toastSuccess, toastWarning } from '../../widgets/layout/toaster'
 import axios from 'axios'
 
 const SignupPage = () => {
-    const [state, setState] = useState([{
-        username: '',
-        email: '',
-        password: ''
-    }])
+    const [state, setState] = useState([{ username: '', email: '', password: ''}])
 
     const postUser = async () => {
         await axios
@@ -24,7 +20,8 @@ const SignupPage = () => {
         })
         .catch(err => {
             console.log(err)
-            toastWarning('Something went wrong, please try again or contact developer if issue persisted')
+            if (err.response.status === 400) toastWarning('Error 400 bad request: please check your input format')
+            else toastWarning('Something else went wrong, please try again or contact developer if issue persisted')
         })
     }
 
