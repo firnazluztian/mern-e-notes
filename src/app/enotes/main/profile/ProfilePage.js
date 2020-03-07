@@ -1,4 +1,5 @@
-import React, { Fragment, useContext} from 'react'
+import React, { Fragment, useContext, useEffect} from 'react'
+import { navigate } from '@reach/router'
 import EnotesNavbar from '../../../widgets/layout/EnotesNavbar'
 import NoteCreator from './NoteCreator'
 import NoteList from './NoteList'
@@ -8,6 +9,14 @@ import NoteDisplayPanel from './NoteDisplayPanel'
 const ProfilePage = () => {
     const { state } = useContext(AppContext)
     
+    useEffect(() => {
+        // NEED FIXING
+        // Expected: state.isUserLoggedIn will stay to forbid user from accessing profile page before login
+        // Actually Happened: working as expected but state.isUserLoggedIn is reset on refresh. will need to be fixed and only change to false on logout
+        console.log('@state.isUserLoggedIn', state.isUserLoggedIn)
+        // if (!state.isUserLoggedIn) navigate('/home')
+    },[state.isUserLoggedIn])
+
     return <Fragment>
 
         <EnotesNavbar />

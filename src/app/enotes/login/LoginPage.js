@@ -1,11 +1,30 @@
 import { Link, navigate } from '@reach/router'
-import React from 'react'
-import { toastSuccess } from '../../widgets/layout/toaster'
+import React, { useState, useEffect, useContext } from 'react'
+import { toastSuccess, toastDanger } from '../../widgets/layout/toaster'
+import { AppContext } from '../../data/globalState'
+import axios from 'axios'
 
 const LoginPage = () => {
+    const { dispatch } = useContext(AppContext)  
+    const [user, setUser] = useState({data:[]})
+    const [input, setInput] = useState({username: '', password: ''})
+
+    const getUser = async () => await axios.get('http://localhost:5000/users/').then(res => setUser(res)).catch(err => console.log(err))
+    useEffect(() => {
+        getUser()
+    },[input])
+
+    const handleChange = (e) => setInput ({...input, [e.target.name]: e.target.value})
     const handleSubmit = () => {
-        navigate('/profile')
-        toastSuccess('You are logged in')
+        let isAuth = user.data.map(item => {
+            if (item.username === input.username && item.password === input.password) return true 
+            else return false
+        }) 
+        if (!isAuth.every((checkAuth) => { return checkAuth === false })) {
+            dispatch({ type: 'USER_SESSION', data: true})
+            navigate('/profile')
+            toastSuccess('You are logged in')
+        } else toastDanger('incorrect user credentials or user credentials does not exist. please try again')
     }
 
     return <div className='row' style={{height:'100vh'}}>
@@ -15,16 +34,22 @@ const LoginPage = () => {
                 
                 <div className='form-group'>
                     <input 
-                        type='username' 
+                        name='username'
+                        type='text' 
                         placeholder='username' 
                         className='form-control' 
+                        value={input.username}
+                        onChange={handleChange} 
                     />
                 </div>
                 <div className='form-group'>
                     <input 
+                        name='password'
                         type='password' 
                         placeholder='password' 
                         className='form-control' 
+                        value={input.password}
+                        onChange={handleChange} 
                         onKeyPress={e => ((e.charCode === 13) ? handleSubmit() : console.log())}
                     />
                 </div>

@@ -43,24 +43,19 @@ const AdminLogin = ({state, handleChange, handleSubmit}) => {
 
 const initialState = [{ id: '', username: '', email: '', password: '' }]
 const AdminPage = () => {
-    const [state, setState] = useState(initialState)
+    const [isAdmin, setIsAdmin] = useState(false) // handle auth admin
+    const [input, setInput] = useState(initialState)
     const [user, setUser] = useState({data:[]})
-    const [isAdmin, setIsAdmin] = useState(false)
     const [edit, setEdit] = useState(false)
 
-    const getUser = async () => {
-        await axios
-        .get('http://localhost:5000/users/')
-        .then(res => setUser(res))
-        .catch(err => console.log(err))
-    }
-
+    const getUser = async () => await axios.get('http://localhost:5000/users/').then(res => setUser(res)).catch(err => console.log(err))
+    const deleteUser = async (id) => await axios.delete(`http://localhost:5000/users/${id}`).then(res => toastSuccess(`user has succesfully been deleted`)).catch(err => console.log(err))
     const editUser = async (id) => {
         await axios 
         .post(`http://localhost:5000/users/update/${id}`, {
-            username: state.username,
-            email: state.email,
-            password: state.password
+            username: input.username,
+            email: input.email,
+            password: input.password
         })
         .then(res => {
             toastSuccess(`user has succesfully been edited!`)
@@ -69,23 +64,13 @@ const AdminPage = () => {
         .catch(err => console.log(err))
     }
 
-    const deleteUser = async (id) => {
-        await axios
-        .delete(`http://localhost:5000/users/${id}`)
-        .then(res => toastSuccess(`user has succesfully been deleted`))
-        .catch(err => console.log(err))
-    }
-
-    const handleChange = (e) => setState ({...state, [e.target.name]: e.target.value})
+    const handleChange = (e) => setInput ({...input, [e.target.name]: e.target.value})
     const handleSubmit = () => {
         if (!isAdmin) {
-            if (state.username === 'admin' && state.password === 'pass') {
-                setIsAdmin(true)
-            } else {
-                toastWarning('wrong credential please try again')
-            }
+            if (input.username === 'admin' && input.password === 'pass') setIsAdmin(true)
+            else toastWarning('wrong credential please try again')
         } else {
-            editUser(state.id)   
+            editUser(input.id)   
         }
     }
     
@@ -97,7 +82,7 @@ const AdminPage = () => {
         <Fragment>
 
             {/* LOGIN AS ADMIN */}
-            {!isAdmin && <AdminLogin state={state} handleChange={handleChange} handleSubmit={handleSubmit} />}
+            {!isAdmin && <AdminLogin state={input} handleChange={handleChange} handleSubmit={handleSubmit} />}
 
             {/* DISPLAY IF ADMIN */}
             {isAdmin &&
@@ -112,6 +97,7 @@ const AdminPage = () => {
                         <th scope="col">id</th>
                         <th scope="col">username</th>
                         <th scope="col">email</th>
+                        <th scope="col">password</th>
                         <th scope="col">action</th>
                         </tr>
                     </thead>
@@ -121,13 +107,14 @@ const AdminPage = () => {
                             <th scope="row">{item._id}</th>
                                 <td>{item.username}</td>
                                 <td>{item.email}</td>
+                                <td>{item.password}</td>
                                 <td>
                                     <Flex>
                                         <button 
                                             className='button is-primary' 
                                             onClick={() => { 
                                                 setEdit(true)
-                                                setState({
+                                                setInput({
                                                     id: item._id,
                                                     username: item.username,
                                                     email: item.email,
@@ -159,7 +146,7 @@ const AdminPage = () => {
                             placeholder='email' 
                             className='form-control' 
                             name='email'
-                            value={state.email}
+                            value={input.email}
                             onChange={handleChange} 
                         />
                     </div>
@@ -169,7 +156,7 @@ const AdminPage = () => {
                             placeholder='username' 
                             className='form-control' 
                             name='username'
-                            value={state.username}
+                            value={input.username}
                             onChange={handleChange} 
                         />
                     </div>
@@ -179,7 +166,7 @@ const AdminPage = () => {
                             placeholder='password' 
                             className='form-control' 
                             name='password'
-                            value={state.password}
+                            value={input.password}
                             onChange={handleChange} 
                             onKeyPress={e => ((e.charCode === 13) ? handleSubmit() : console.log())}
                         />
