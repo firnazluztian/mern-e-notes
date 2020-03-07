@@ -138,45 +138,6 @@ code {
   border-top-right-radius: 0;
 }
 
-/* PROFILE PAGE */
-.profile-bg {
-  height: 50em;
-  background-image: url('/img/header.jpg');
-  padding-top: 5em;
-}
-
-.profile-container {
-  background-color: white;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  height: 95%;
-  padding: 1em;
-  text-align: center;
-  overflow: scroll;
-  overflow-y: scroll;
-}
-
-.profile-pic {
-  position: relative;
-  text-align: center;
-  border-radius: 100em;
-  margin-bottom: 1em;
-}
-
-.notes-container {
-  margin-bottom: 1em;
-  text-align: top;
-  width: 100%;
-  height: 20em;
-  padding: 1em;
-  border: 0px solid black;
-}
-
-.stored-notes:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-}
-
 /* sign up and login form */
 .forms {
   width: 400px;
@@ -185,6 +146,22 @@ code {
   margin: 1em;
   border-radius: 5px;
 }
+
+/* PROFILE PAGE CARD */
+.profile-page-container {
+  background-color: #6d4c41;
+  background-image: url(https://i.pinimg.com/originals/e5/8a/e5/e58ae5ca3f368c6e490602a511c05ed2.jpg);
+  background-size: cover;
+}
+
+.card-notes {
+  background-image: url(https://www.bromsgroveadvertiser.co.uk/resources/static/shaken/images/bg-texture2.jpg);
+}
+
+.card header {
+  background-color: #6d4c41;
+}
+
 
 /* // Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) { 

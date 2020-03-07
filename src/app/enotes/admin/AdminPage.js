@@ -6,7 +6,6 @@ import { toastSuccess, toastWarning } from '../../widgets/layout/toaster'
 import { Flex } from '../../widgets/layout/Allignment'
 
 const AdminLogin = ({state, handleChange, handleSubmit}) => {
-    // const [loginState, useLoginState] = useEffect(state)
     return <Fragment>
     <div className='row' style={{height:'100vh'}}>
         <div className='col-sm-12 my-auto'>

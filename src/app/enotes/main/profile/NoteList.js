@@ -5,10 +5,10 @@ import faker from 'faker';
 import { AppContext } from '../../../data/globalState'
 
 const dummAPI = [
-    { id: 0, title: 'Biology class', content: faker.lorem.paragraph()},
-    { id: 1, title: 'Physics class', content: faker.lorem.paragraph()},
-    { id: 2, title: 'Math class', content: faker.lorem.paragraph()},
-    { id: 3, title: 'English class', content: faker.lorem.paragraph()}
+    { id: 0, title: 'Biology class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
+    { id: 1, title: 'Physics class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
+    { id: 2, title: 'Math class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
+    { id: 3, title: 'English class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'}
 ]
 
 const NotesCard = ({header, content, dateCreated}) => {
@@ -19,11 +19,9 @@ const NotesCard = ({header, content, dateCreated}) => {
     const handleOption = () => dispatch({ type: 'UPDATE_INPUT', data: (!state.notePanel)})
 
     return <Fragment>
-        <div className="card">
+        <div className="card card-notes">
             <header className="card-header">
-            <h5 className="card-header-title">
-                {header}
-            </h5>
+            <h5 className="card-header-title text-white">{header}</h5>
             <button onClick={handleOption} className="button card-header-icon" aria-label="more options">
                 <span className="icon">
                 <i className="fas fa-angle-down" aria-hidden="true"></i>
@@ -32,7 +30,7 @@ const NotesCard = ({header, content, dateCreated}) => {
             </header>
             <div className="card-content">
                 <p>{content}</p>
-                <p>{dateCreated}</p>
+                <p>Date created: {dateCreated}</p>
             </div>
             <footer className="card-footer">
                 <button onClick={handleEdit} className="button is-info">Edit</button>
@@ -47,7 +45,7 @@ const NotesCard = ({header, content, dateCreated}) => {
 const NoteList = () => {
     return <Fragment>
         {dummAPI.map((item, index) => {
-            return <NotesCard key={index} header={item.title} content={item.content} dateCreated='05/03/2020 | 21.00'/>
+            return <NotesCard key={index} header={item.title} content={item.content} dateCreated={item.dateCreated}/>
         })}
     </Fragment>
 } 
