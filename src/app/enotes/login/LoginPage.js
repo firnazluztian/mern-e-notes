@@ -1,9 +1,11 @@
 import { Link, navigate } from '@reach/router'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { toastSuccess, toastDanger } from '../../widgets/layout/toaster'
+import { AppContext } from '../../data/globalState'
 import axios from 'axios'
 
 const LoginPage = () => {
+    const { dispatch } = useContext(AppContext)  
     const [user, setUser] = useState({data:[]})
     const [input, setInput] = useState({username: '', password: ''})
 
@@ -19,6 +21,7 @@ const LoginPage = () => {
             else return false
         }) 
         if (!isAuth.every((checkAuth) => { return checkAuth === false })) {
+            dispatch({ type: 'USER_SESSION', data: true})
             navigate('/profile')
             toastSuccess('You are logged in')
         } else toastDanger('incorrect user credentials or user credentials does not exist. please try again')

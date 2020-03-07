@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { navigate } from '@reach/router'
 import Space from './Space'
 import { toastSuccess } from './toaster'
+import { AppContext } from '../../data/globalState'
 
 // const NavList = props => {
 //     return (
@@ -14,6 +15,7 @@ import { toastSuccess } from './toaster'
 // }
 
 const EnotesNavbar = () => {
+    const { dispatch } = useContext(AppContext)
     return <nav className="navbar navbar-expand-lg navbar-light">
         E-NOTES
 
@@ -42,6 +44,7 @@ const EnotesNavbar = () => {
                   className='button is-danger'
                   type='submit'
                   onClick={() => {
+                    dispatch({ type: 'USER_SESSION', data: false})
                     toastSuccess('Successfully logged out')
                     navigate('/home')}
                   }
