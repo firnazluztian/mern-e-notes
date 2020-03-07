@@ -1,15 +1,15 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useState, useEffect } from 'react'
 import Space from '../../../widgets/layout/Space'
 import { toastSuccess } from '../../../widgets/layout/toaster'
-import faker from 'faker';
 import { AppContext } from '../../../data/globalState'
+import axios from 'axios';
 
-const dummAPI = [
-    { id: 0, title: 'Biology class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
-    { id: 1, title: 'Physics class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
-    { id: 2, title: 'Math class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
-    { id: 3, title: 'English class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'}
-]
+// const dummAPI = [
+//     { id: 0, title: 'Biology class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
+//     { id: 1, title: 'Physics class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
+//     { id: 2, title: 'Math class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
+//     { id: 3, title: 'English class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'}
+// ]
 
 const NotesCard = ({header, content, dateCreated}) => {
     const {state, dispatch} = useContext(AppContext)    
@@ -43,9 +43,17 @@ const NotesCard = ({header, content, dateCreated}) => {
 }
 
 const NoteList = () => {
+    const [item, setItem] = useState({data:[]})
+
+    const getItem = async () => await axios.get('http://localhost:5000/items/').then(res => setItem(res)).catch(err => console.log(err))
+
+    useEffect(() => {
+        getItem()
+    })
+
     return <Fragment>
-        {dummAPI.map((item, index) => {
-            return <NotesCard key={index} header={item.title} content={item.content} dateCreated={item.dateCreated}/>
+        {item.data.map((item, index) => {
+            return <NotesCard key={`item-${index}`} header={item.title} content={item.content} dateCreated={item.createdAt}/>
         })}
     </Fragment>
 } 
