@@ -12,8 +12,8 @@ const NoteCreator = () => {
             content: item.content 
         })
         .then(res => {
+            toastSuccess(`"${item.title}" is succesfully saved`)
             setItem({ title: '', content: '' })
-            toastSuccess('Succesfully saved')
         })
         .catch(err => console.log(err))
     } 

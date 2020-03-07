@@ -11,11 +11,18 @@ import axios from 'axios';
 //     { id: 3, title: 'English class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'}
 // ]
 
-const NotesCard = ({header, content, dateCreated}) => {
-    const {state, dispatch} = useContext(AppContext)    
+const NotesCard = ({id, header, content, dateCreated}) => {
+    const {state, dispatch} = useContext(AppContext)   
+    
+    const deleteItem = async () => {
+        await axios
+        .delete(`http://localhost:5000/items/${id}`)
+        .then(res => toastSuccess(`"${header}" has succesfully been deleted`))
+        .catch(err => console.log(err))
+    }
 
     const handleEdit = () => toastSuccess(`"${header}" is succesfully edited`)
-    const handleDelete = () => toastSuccess(`"${header}" is succesfully deleted`)
+    const handleDelete = () => deleteItem()
     const handleOption = () => dispatch({ type: 'UPDATE_INPUT', data: (!state.notePanel)})
 
     return <Fragment>
@@ -53,7 +60,7 @@ const NoteList = () => {
 
     return <Fragment>
         {item.data.map((item, index) => {
-            return <NotesCard key={`item-${index}`} header={item.title} content={item.content} dateCreated={item.createdAt}/>
+            return <NotesCard key={`item-${index}`} id={item._id} header={item.title} content={item.content} dateCreated={item.createdAt} />
         })}
     </Fragment>
 } 
