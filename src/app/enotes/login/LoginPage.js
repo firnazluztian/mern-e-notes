@@ -1,8 +1,12 @@
 import { Link, navigate } from '@reach/router'
 import React from 'react'
+import { toastSuccess } from '../../widgets/layout/toaster'
 
 const LoginPage = () => {
-    const handleSubmit = () => navigate('/profile')
+    const handleSubmit = () => {
+        navigate('/profile')
+        toastSuccess('You are logged in')
+    }
 
     return <div className='row' style={{height:'100vh'}}>
         <div className='col-sm-12 my-auto'>
@@ -24,7 +28,7 @@ const LoginPage = () => {
                         onKeyPress={e => ((e.charCode === 13) ? handleSubmit() : console.log())}
                     />
                 </div>
-                <div class="d-flex justify-content-center">
+                <div className="d-flex justify-content-center">
                     <button type='submit' className='button is-info' onClick={handleSubmit}>Login</button>
                 </div>
             </div>

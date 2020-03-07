@@ -6,7 +6,6 @@ import { toastSuccess, toastWarning } from '../../widgets/layout/toaster'
 import { Flex } from '../../widgets/layout/Allignment'
 
 const AdminLogin = ({state, handleChange, handleSubmit}) => {
-    // const [loginState, useLoginState] = useEffect(state)
     return <Fragment>
     <div className='row' style={{height:'100vh'}}>
         <div className='col-sm-12 my-auto'>
@@ -33,7 +32,7 @@ const AdminLogin = ({state, handleChange, handleSubmit}) => {
                         onKeyPress={e => ((e.charCode === 13) ? handleSubmit() : console.log())}
                     />
                 </div>
-                <div class="d-flex justify-content-center">
+                <div className="d-flex justify-content-center">
                     <button type='submit' className='button is-primary' onClick={handleSubmit}>Login</button>
                 </div>
             </div>
@@ -107,7 +106,7 @@ const AdminPage = () => {
                 <h5>Registered user</h5>
                 {!user
                 ? <p>Unable to retreive data, please check your connection</p>
-                : <table class="table table-hover">
+                : <table className="table table-hover">
                     <thead>
                         <tr className="table-success">
                         <th scope="col">id</th>
