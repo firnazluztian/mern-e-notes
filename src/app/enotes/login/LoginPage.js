@@ -9,7 +9,7 @@ const LoginPage = () => {
     const [user, setUser] = useState({data:[]})
     const [input, setInput] = useState({username: '', password: ''})
 
-    const getUser = async () => await axios.get('http://localhost:5000/users/').then(res => setUser(res)).catch(err => console.log(err))
+    const getUser = async () => await axios.get('https://firnaz-enotes.herokuapp.com/users/').then(res => setUser(res)).catch(err => console.log(err))
     useEffect(() => { getUser() },[input])
 
     const handleChange = (e) => setInput ({...input, [e.target.name]: e.target.value})

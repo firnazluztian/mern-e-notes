@@ -48,11 +48,11 @@ const AdminPage = () => {
     const [user, setUser] = useState({data:[]})
     const [edit, setEdit] = useState(false)
 
-    const getUser = async () => await axios.get('http://localhost:5000/users/').then(res => setUser(res)).catch(err => console.log(err))
-    const deleteUser = async (id) => await axios.delete(`http://localhost:5000/users/${id}`).then(res => toastSuccess(`user has succesfully been deleted`)).catch(err => console.log(err))
+    const getUser = async () => await axios.get('https://firnaz-enotes.herokuapp.com/users/').then(res => setUser(res)).catch(err => console.log(err))
+    const deleteUser = async (id) => await axios.delete(`https://firnaz-enotes.herokuapp.com/users/${id}`).then(res => toastSuccess(`user has succesfully been deleted`)).catch(err => console.log(err))
     const editUser = async (id) => {
         await axios 
-        .post(`http://localhost:5000/users/update/${id}`, {
+        .post(`https://firnaz-enotes.herokuapp.com/users/update/${id}`, {
             username: input.username,
             email: input.email,
             password: input.password

@@ -9,7 +9,7 @@ const NoteDisplayPanel = () => {
     const {state} = useContext(AppContext)   
     const [noteData, setNoteData] = useState({data:[]})
 
-    const getNoteByID = async (id) => await axios.get(`http://localhost:5000/items/${id}`).then(res => setNoteData(res)).catch(err => console.log(err))
+    const getNoteByID = async (id) => await axios.get(`https://firnaz-enotes.herokuapp.com/items/${id}`).then(res => setNoteData(res)).catch(err => console.log(err))
 
     useEffect(() => { getNoteByID(state.note_id) }, [state.note_id])
 
