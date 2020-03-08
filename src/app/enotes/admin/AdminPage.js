@@ -76,7 +76,7 @@ const AdminPage = () => {
     
     useEffect(() => {
         getUser()
-    })
+    }, [user])
 
     return (
         <Fragment>
@@ -103,7 +103,7 @@ const AdminPage = () => {
                     </thead>
                     <tbody>
                         {user.data.map((item, index) => {
-                            return <tr>
+                            return <tr key={`user-${index}`}>
                             <th scope="row">{item._id}</th>
                                 <td>{item.username}</td>
                                 <td>{item.email}</td>

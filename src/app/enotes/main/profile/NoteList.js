@@ -1,24 +1,29 @@
-import React, { Fragment, useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Space from '../../../widgets/layout/Space'
 import { toastSuccess } from '../../../widgets/layout/toaster'
-import faker from 'faker';
 import { AppContext } from '../../../data/globalState'
+import axios from 'axios'
+import { parseDate } from '../../../data/helperTools'
 
-const dummAPI = [
-    { id: 0, title: 'Biology class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
-    { id: 1, title: 'Physics class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
-    { id: 2, title: 'Math class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
-    { id: 3, title: 'English class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'}
-]
+const NotesCard = ({id, header, content, dateCreated}) => {
+    const {dispatch} = useContext(AppContext)   
+    
+    const deleteItem = async () => {
+        await axios
+        .delete(`http://localhost:5000/items/${id}`)
+        .then(res => toastSuccess(`"${header}" has succesfully been deleted`))
+        .catch(err => console.log(err))
+    }
 
-const NotesCard = ({header, content, dateCreated}) => {
-    const {state, dispatch} = useContext(AppContext)    
+    // will do in future development!
+    // const handleEdit = () => toastSuccess(`"${header}" is succesfully edited`)
+    const handleDelete = () => deleteItem()
+    const handleOption = () => {
+        //dispatch({ type: 'UPDATE_INPUT', data: (!state.notePanel) })
+        dispatch({ type: 'NOTE_ID', data: id })
+    }
 
-    const handleEdit = () => toastSuccess(`"${header}" is succesfully edited`)
-    const handleDelete = () => toastSuccess(`"${header}" is succesfully deleted`)
-    const handleOption = () => dispatch({ type: 'UPDATE_INPUT', data: (!state.notePanel)})
-
-    return <Fragment>
+    return <div className='grid-item'>
         <div className="card card-notes">
             <header className="card-header">
             <h5 className="card-header-title text-white">{header}</h5>
@@ -28,26 +33,35 @@ const NotesCard = ({header, content, dateCreated}) => {
                 </span>
             </button>
             </header>
-            <div className="card-content">
+            <div className="card-content card-content-list">
                 <p>{content}</p>
-                <p>Date created: {dateCreated}</p>
+                <p className='text-center text-primary'>Date created: {dateCreated}</p>
             </div>
             <footer className="card-footer">
-                <button onClick={handleEdit} className="button is-info">Edit</button>
+                {/* will do in future development! */}
+                {/* <button onClick={handleEdit} className="button is-info">Edit</button> */}
                 <Space marginRight='10px' />
                 <button onClick={handleDelete} className="button is-danger">Delete</button>
             </footer>
         </div>
         <Space marginBottom='10px' />
-    </Fragment>
+    </div>
 }
 
 const NoteList = () => {
-    return <Fragment>
-        {dummAPI.map((item, index) => {
-            return <NotesCard key={index} header={item.title} content={item.content} dateCreated={item.dateCreated}/>
+    const [item, setItem] = useState({data:[]})
+
+    const getItem = async () => await axios.get('http://localhost:5000/items/').then(res => setItem(res)).catch(err => console.log(err))
+
+    useEffect(() => {
+        getItem()
+    }, [item])
+
+    return <div className='grid-container'>
+        {item.data.map((item, index) => {
+            return <NotesCard key={`item-${index}`} id={item._id} header={item.title} content={item.content} dateCreated={parseDate(item.createdAt)} />
         })}
-    </Fragment>
+    </div>
 } 
 
 export default NoteList

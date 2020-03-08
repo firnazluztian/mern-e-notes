@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect} from 'react'
-import { navigate } from '@reach/router'
+// import { navigate } from '@reach/router'
 import EnotesNavbar from '../../../widgets/layout/EnotesNavbar'
 import NoteCreator from './NoteCreator'
 import NoteList from './NoteList'
@@ -22,11 +22,13 @@ const ProfilePage = () => {
         <EnotesNavbar />
 
         <div className='container-full-width profile-page-container'>
-            <div className={state.notePanel ? 'container-full-width card' : 'container card'} style={{backgroundColor: 'white', padding: '1em'}}>
+            {/* <div className={state.notePanel ? 'container-full-width card' : 'container card'} style={{backgroundColor: 'white', padding: '1em'}}> */}
+            <div className={'container-full-width card'} style={{backgroundColor: 'white', padding: '1em'}}>
                 <div className='columns'>
                     <div className='column'><NoteCreator /></div>
                     <div className='column'><NoteList /></div>
-                    {state.notePanel && <div className='column'><NoteDisplayPanel /></div>}
+                    <div className='column'><NoteDisplayPanel /></div>
+                    {/* {state.notePanel && <div className='column'><NoteDisplayPanel /></div>} */}
                 </div>
             </div>
         </div>

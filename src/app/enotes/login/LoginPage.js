@@ -10,9 +10,7 @@ const LoginPage = () => {
     const [input, setInput] = useState({username: '', password: ''})
 
     const getUser = async () => await axios.get('http://localhost:5000/users/').then(res => setUser(res)).catch(err => console.log(err))
-    useEffect(() => {
-        getUser()
-    },[input])
+    useEffect(() => { getUser() },[input])
 
     const handleChange = (e) => setInput ({...input, [e.target.name]: e.target.value})
     const handleSubmit = () => {
@@ -21,7 +19,8 @@ const LoginPage = () => {
             else return false
         }) 
         if (!isAuth.every((checkAuth) => { return checkAuth === false })) {
-            dispatch({ type: 'USER_SESSION', data: true})
+            // dispatch({ type: 'USER_SESSION', data: true})
+            dispatch({ type: 'USER_NAME', data: input.username})
             navigate('/profile')
             toastSuccess('You are logged in')
         } else toastDanger('incorrect user credentials or user credentials does not exist. please try again')

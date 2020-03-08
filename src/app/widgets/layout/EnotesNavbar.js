@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { navigate } from '@reach/router'
 import Space from './Space'
 import { toastSuccess } from './toaster'
@@ -15,12 +15,13 @@ import { AppContext } from '../../data/globalState'
 // }
 
 const EnotesNavbar = () => {
-    const { dispatch } = useContext(AppContext)
+    const { state, dispatch } = useContext(AppContext)
+    const [username] = useState(state.user_name)
     return <nav className="navbar navbar-expand-lg navbar-light">
         E-NOTES
 
         <Space marginRight="10px" />
-  
+
         <button
           className="navbar-toggler"
           type="button"
@@ -39,18 +40,17 @@ const EnotesNavbar = () => {
           </ul>
 
           <div className="login-container">
-              
-              <button
-                  className='button is-danger'
-                  type='submit'
-                  onClick={() => {
-                    dispatch({ type: 'USER_SESSION', data: false})
-                    toastSuccess('Successfully logged out')
-                    navigate('/home')}
-                  }
-              >
-                LOGOUT
-              </button>
+
+            <button className='button' onClick={() => toastSuccess(`You look amazing today ${username} :)`)}>Hello {username}</button>
+            <button
+                className='button is-danger'
+                type='submit'
+                onClick={() => {
+                  dispatch({ type: 'USER_SESSION', data: false})
+                  toastSuccess(`Bye ${username}, you have succesfully been logged out`)
+                  navigate('/home')}
+                }
+            >LOGOUT</button>
           </div>
         </div>
     </nav>

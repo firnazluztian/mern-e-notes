@@ -1,8 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { toastSuccess } from '../../../widgets/layout/toaster'
+import axios from 'axios'
 
 const NoteCreator = () => {
-    const handleSubmit = () => toastSuccess('Succesfully saved')
+    const [item, setItem] = useState({ title: '', content: '' })
+
+    const postItem = async () => {
+        await axios
+        .post('http://localhost:5000/items/add', { 
+            title: item.title, 
+            content: item.content 
+        })
+        .then(res => {
+            toastSuccess(`"${item.title}" is succesfully saved`)
+            setItem({ title: '', content: '' })
+        })
+        .catch(err => console.log(err))
+    } 
+    const handleChange = (e) => setItem ({...item, [e.target.name]: e.target.value})
+    const handleSubmit = () => postItem()
+
     return <div className="card">
         <header className="card-header">
             <h5 className="card-header-title text-white">
@@ -12,16 +29,23 @@ const NoteCreator = () => {
         <div className="card-content">
             <div className='form-group'>
                 <input 
-                    type='Title' 
+                    name='title'
+                    type='text' 
                     placeholder='Title' 
                     className='form-control' 
+                    value={item.title}
+                    onChange={handleChange}
                 />
             </div>
             <div className='form-group'>
                 <textarea 
-                    type='content' 
+                    name='content'
+                    type='text' 
                     placeholder='Write your notes here' 
                     className='textarea form-control' 
+                    value={item.content}
+                    onChange={handleChange}
+                    style={{minHeight: '25vh'}}
                 />
             </div>
             <button onClick={handleSubmit} className='button is-success'>Save</button>

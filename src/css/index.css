@@ -158,8 +158,27 @@ code {
   background-image: url(https://www.bromsgroveadvertiser.co.uk/resources/static/shaken/images/bg-texture2.jpg);
 }
 
+.card-content-list {
+  height: 10vh;
+  overflow: scroll;
+}
+
 .card header {
   background-color: #6d4c41;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.grid-item {
+  text-align: left;
+  margin-right: 10px;
+}
+
+.card-display-panel {
+  min-height: 80vh;
 }
 
 
@@ -169,6 +188,13 @@ code {
     text-align: center;
   }
 }
+
+@media (max-width: 576px) { 
+  .grid-container {
+    grid-template-columns: auto;
+  }
+}
+
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) { 
