@@ -45,6 +45,7 @@ const NoteCreator = () => {
                     className='textarea form-control' 
                     value={item.content}
                     onChange={handleChange}
+                    style={{minHeight: '25vh'}}
                 />
             </div>
             <button onClick={handleSubmit} className='button is-success'>Save</button>

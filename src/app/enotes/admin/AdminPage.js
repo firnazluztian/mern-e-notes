@@ -76,7 +76,7 @@ const AdminPage = () => {
     
     useEffect(() => {
         getUser()
-    })
+    }, [user])
 
     return (
         <Fragment>

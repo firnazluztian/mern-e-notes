@@ -1,18 +1,12 @@
-import React, { Fragment, useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Space from '../../../widgets/layout/Space'
 import { toastSuccess } from '../../../widgets/layout/toaster'
 import { AppContext } from '../../../data/globalState'
-import axios from 'axios';
-
-// const dummAPI = [
-//     { id: 0, title: 'Biology class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
-//     { id: 1, title: 'Physics class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
-//     { id: 2, title: 'Math class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'},
-//     { id: 3, title: 'English class', content: faker.lorem.paragraph(), dateCreated: '10.00pm 05/03/2020'}
-// ]
+import axios from 'axios'
+import { parseDate } from '../../../data/helperTools'
 
 const NotesCard = ({id, header, content, dateCreated}) => {
-    const {state, dispatch} = useContext(AppContext)   
+    const {dispatch} = useContext(AppContext)   
     
     const deleteItem = async () => {
         await axios
@@ -21,11 +15,15 @@ const NotesCard = ({id, header, content, dateCreated}) => {
         .catch(err => console.log(err))
     }
 
-    const handleEdit = () => toastSuccess(`"${header}" is succesfully edited`)
+    // will do in future development!
+    // const handleEdit = () => toastSuccess(`"${header}" is succesfully edited`)
     const handleDelete = () => deleteItem()
-    const handleOption = () => dispatch({ type: 'UPDATE_INPUT', data: (!state.notePanel)})
+    const handleOption = () => {
+        //dispatch({ type: 'UPDATE_INPUT', data: (!state.notePanel) })
+        dispatch({ type: 'NOTE_ID', data: id })
+    }
 
-    return <Fragment>
+    return <div className='grid-item'>
         <div className="card card-notes">
             <header className="card-header">
             <h5 className="card-header-title text-white">{header}</h5>
@@ -35,18 +33,19 @@ const NotesCard = ({id, header, content, dateCreated}) => {
                 </span>
             </button>
             </header>
-            <div className="card-content">
+            <div className="card-content card-content-list">
                 <p>{content}</p>
-                <p>Date created: {dateCreated}</p>
+                <p className='text-center text-primary'>Date created: {dateCreated}</p>
             </div>
             <footer className="card-footer">
-                <button onClick={handleEdit} className="button is-info">Edit</button>
+                {/* will do in future development! */}
+                {/* <button onClick={handleEdit} className="button is-info">Edit</button> */}
                 <Space marginRight='10px' />
                 <button onClick={handleDelete} className="button is-danger">Delete</button>
             </footer>
         </div>
         <Space marginBottom='10px' />
-    </Fragment>
+    </div>
 }
 
 const NoteList = () => {
@@ -56,13 +55,13 @@ const NoteList = () => {
 
     useEffect(() => {
         getItem()
-    })
+    }, [item])
 
-    return <Fragment>
+    return <div className='grid-container'>
         {item.data.map((item, index) => {
-            return <NotesCard key={`item-${index}`} id={item._id} header={item.title} content={item.content} dateCreated={item.createdAt} />
+            return <NotesCard key={`item-${index}`} id={item._id} header={item.title} content={item.content} dateCreated={parseDate(item.createdAt)} />
         })}
-    </Fragment>
+    </div>
 } 
 
 export default NoteList
