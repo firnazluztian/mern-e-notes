@@ -10,7 +10,7 @@ const NotesCard = ({id, header, content, dateCreated}) => {
     
     const deleteItem = async () => {
         await axios
-        .delete(`http://localhost:5000/items/${id}`)
+        .delete(`https://firnaz-enotes.herokuapp.com/items/${id}`)
         .then(res => toastSuccess(`"${header}" has succesfully been deleted`))
         .catch(err => console.log(err))
     }
@@ -51,7 +51,7 @@ const NotesCard = ({id, header, content, dateCreated}) => {
 const NoteList = () => {
     const [item, setItem] = useState({data:[]})
 
-    const getItem = async () => await axios.get('http://localhost:5000/items/').then(res => setItem(res)).catch(err => console.log(err))
+    const getItem = async () => await axios.get('https://firnaz-enotes.herokuapp.com/items/').then(res => setItem(res)).catch(err => console.log(err))
 
     useEffect(() => {
         getItem()

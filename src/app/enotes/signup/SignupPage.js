@@ -8,7 +8,7 @@ const SignupPage = () => {
 
     const postUser = async () => {
         await axios
-        .post('http://localhost:5000/users/add', {
+        .post('https://firnaz-enotes.herokuapp.com/users/add', {
             username: state.username,
             email: state.email,
             password: state.password

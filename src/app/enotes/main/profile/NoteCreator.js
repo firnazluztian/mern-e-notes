@@ -7,7 +7,7 @@ const NoteCreator = () => {
 
     const postItem = async () => {
         await axios
-        .post('http://localhost:5000/items/add', { 
+        .post('https://firnaz-enotes.herokuapp.com/items/add', { 
             title: item.title, 
             content: item.content 
         })
